@@ -1194,7 +1194,7 @@ class Scss(object):
                     if i_codestr is None:
                         load_paths = load_paths and "\nLoad paths:\n\t%s" % "\n\t".join(load_paths) or ''
                         unsupported = unsupported and "\nPossible matches (for unsupported file format SASS):\n\t%s" % "\n\t".join(unsupported) or ''
-                        log.warn("File to import not found or unreadable: '%s' (%s)%s%s", filename, rule[INDEX][rule[LINENO]], load_paths, unsupported)
+                        log.warn("File to import not found or unreadable: '%s' (%s)%s%s", name, rule[INDEX][rule[LINENO]], load_paths, unsupported)
                     else:
                         _rule = spawn_rule(rule, codestr=i_codestr, path=full_filename, lineno=c_lineno)
                         self.manage_children(_rule, p_selectors, p_parents, p_children, scope, media)
@@ -2574,7 +2574,11 @@ def _sprite_map(g, **kwargs):
 
         map_name = os.path.normpath(os.path.dirname(g)).replace('\\', '_').replace('/', '_')
         key = list(zip(*files)[0]) + times + [repr(kwargs)]
-        key = map_name + '-' + base64.urlsafe_b64encode(hashlib.md5(repr(key)).digest()).rstrip('=').replace('-', '_')
+
+        # removing the hashing for now
+        # key = map_name + '-' + base64.urlsafe_b64encode(hashlib.md5(repr(key)).digest()).rstrip('=').replace('-', '_')
+        key = map_name
+
         asset_file = key + '.png'
         asset_path = os.path.join(ASSETS_ROOT, asset_file)
 
@@ -5175,6 +5179,8 @@ def main():
                       help="Static root path (Where images and static resources are located)")
     paths_group.add_option("-A", "--assets-root", metavar="PATH", dest="assets_root",
                       help="Assets root path (Sprite images will be created here)")
+    paths_group.add_option("-U", "--assets-url", metavar="PATH", dest="assets_url",
+                      help="Assets root url (Sprite images will be served here)")
     parser.add_option_group(paths_group)
 
     (options, args) = parser.parse_args()
