@@ -5195,6 +5195,8 @@ def main():
         STATIC_ROOT = options.static_root
     if options.assets_root is not None:
         ASSETS_ROOT = options.assets_root
+    if options.assets_url is not None:
+        ASSETS_URL = options.assets_url
     if options.load_paths is not None:
         load_paths = [p.strip() for p in LOAD_PATHS.split(',')]
         for load_path in options.load_paths:
