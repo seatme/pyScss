@@ -5186,7 +5186,7 @@ def main():
     (options, args) = parser.parse_args()
 
     # General runtime configuration
-    global LOAD_PATHS, VERBOSITY, STATIC_ROOT, ASSETS_ROOT
+    global LOAD_PATHS, VERBOSITY, STATIC_ROOT, ASSETS_ROOT, ASSETS_URL
     VERBOSITY = 0
 
     if options.time:
