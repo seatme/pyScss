@@ -2584,6 +2584,9 @@ def _sprite_map(g, **kwargs):
 
         if os.path.exists(asset_path + '.cache'):
             asset, map, sizes = pickle.load(open(asset_path + '.cache'))
+            filetime = int(time.mktime(datetime.datetime.now().timetuple()))
+            url = '%s%s?_=%s' % (ASSETS_URL, asset_file, filetime)
+            asset = 'url("%s") %s' % (escape(url), repeat)
             sprite_maps[asset] = map
         else:
             images = tuple(Image.open(storage.open(file)) if storage is not None else Image.open(file) for file, storage in files)
