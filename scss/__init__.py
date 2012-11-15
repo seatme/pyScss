@@ -5180,6 +5180,8 @@ def main():
                       help="Add a scss import path")
     paths_group.add_option("-S", "--static-root", metavar="PATH", dest="static_root",
                       help="Static root path (Where images and static resources are located)")
+    paths_group.add_option("-M", "--static-url", metavar="PATH", dest="static_url",
+                           help="Static root url path (Where images and static resources are served)")
     paths_group.add_option("-A", "--assets-root", metavar="PATH", dest="assets_root",
                       help="Assets root path (Sprite images will be created here)")
     paths_group.add_option("-U", "--assets-url", metavar="PATH", dest="assets_url",
@@ -5189,13 +5191,15 @@ def main():
     (options, args) = parser.parse_args()
 
     # General runtime configuration
-    global LOAD_PATHS, VERBOSITY, STATIC_ROOT, ASSETS_ROOT, ASSETS_URL
+    global LOAD_PATHS, VERBOSITY, STATIC_ROOT, STATIC_URL, ASSETS_ROOT, ASSETS_URL
     VERBOSITY = 0
 
     if options.time:
         VERBOSITY = 2
     if options.static_root is not None:
         STATIC_ROOT = options.static_root
+    if options.static_url is not None:
+        STATIC_URL = options.static_url
     if options.assets_root is not None:
         ASSETS_ROOT = options.assets_root
     if options.assets_url is not None:
