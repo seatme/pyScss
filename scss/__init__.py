@@ -2584,7 +2584,7 @@ def _sprite_map(g, **kwargs):
 
         if os.path.exists(asset_path + '.cache'):
             asset, map, sizes = pickle.load(open(asset_path + '.cache'))
-            filetime = int(time.mktime(datetime.datetime.now().timetuple()))
+            filetime = int(os.path.getmtime(asset_path + '.cache'))
             url = '%s%s?_=%s' % (ASSETS_URL, asset_file, filetime)
             asset = 'url("%s") %s' % (escape(url), repeat)
             sprite_maps[asset] = map
